@@ -49,7 +49,7 @@ class Contact(models.Model):
     yourbusinessname= models.CharField(max_length=200)
     yourname= models.CharField(max_length=200)
     address= models.CharField(max_length=200)
-    address2= models.CharField(max_length=200)
+    address2= models.CharField(blank=True, null=True,max_length=200)
     city= models.CharField(max_length=200)
     state= models.CharField(max_length=40, choices=TITLE_STATES)
     zipcode= models.PositiveIntegerField(validators=[MaxValueValidator(99999)])
@@ -102,7 +102,7 @@ class Recipient(models.Model):
     zipcode = models.PositiveIntegerField(validators=[MaxValueValidator(99999)])
     email = models.CharField(max_length=200)
     fax = models.IntegerField(blank=True, null=True)
-    rtype: models.CharField(choices=TYPES, blank= True, null=True)
+    rtype = models.CharField(max_length=100, choices=TYPES, blank= True, null=True)
     projectname= models.CharField(blank= True, null=True,max_length=200)
     address= models.CharField(blank= True, null=True,max_length=200)
     wcity= models.CharField(blank= True, null=True,max_length=200)
@@ -111,6 +111,8 @@ class Recipient(models.Model):
     description= models.CharField(max_length=300,blank= True, null=True,)
     projectsdate= models.DateField(blank= True, null=True)
     projectedate=models.DateField(blank= True, null=True)
+    employeenum= models.BigIntegerField(blank=True, null=True)
+    cost = models.FloatField(blank=True, null=True)
 
     def __str__(self):
         return self.name

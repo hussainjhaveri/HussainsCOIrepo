@@ -111,15 +111,16 @@ class CertHolderView(View):
         return render(request, template_name,data)
 
 @staff_member_required()
-def editRecipientView(request, pk=None,):
+def editRecipientView(request, pk=None):
     if pk:
-        getrecipient = Recipient.objects.get(Requester_id=pk)
-        key = Recipient.objects.get(Requester_id=pk)
+
+        getrecipient = Recipient.objects.get(user_id=pk)
+        #key = Recipient.objects.get(Requester_id=pk)
         form = RecipientForm(instance=getrecipient)
         if request.method == 'POST':
             form = RecipientForm(request.POST, instance=getrecipient)
             form.save()
-            return redirect("accounts:certholder", pk=key.id)
+            return redirect("accounts:certholder", pk = pk )
 
     args = {'recipient': getrecipient, 'form': form}
 
